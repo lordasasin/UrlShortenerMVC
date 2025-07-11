@@ -2,15 +2,14 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 dotenv.config();
+const pino = require('pino');
+const logger = pino();
 const app = express();
 app.use(express.json());
 
 
 
 
-const userRoute = require('./router/userRouter');
-const authRoute = require('./router/authRouter');
-const urlRoute = require('./router/urlRouter');
 
 
 
@@ -18,9 +17,10 @@ const urlRoute = require('./router/urlRouter');
 
 
 
-app.use("/user" , userRoute);
-app.use("/auth" , authRoute);
-app.use("/url" , urlRoute);
+
+app.use("/user" , require('./router/userRouter'));
+app.use("/auth" , require('./router/authRouter'));
+app.use("/url" , require('./router/urlRouter'));
 
 
 app.listen(process.env.PORT, () => {
@@ -28,6 +28,11 @@ app.listen(process.env.PORT, () => {
     mongoose.connect(process.env.MONGO_CONNECT)
     .then(() => console.log("MongoDB connected"))
     .catch(err => console.log(err));
+
+
+    mongoose.connection.on('error', err => {
+        logger.error(err);
+      });
 
     console.log(`Server running on PORT ${process.env.PORT}`);
     console.log(`[POST] http://localhost:${process.env.PORT}/register  Body: { username, password }`);

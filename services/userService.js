@@ -1,20 +1,20 @@
 const User = require('../models/user');
 const Url = require('../models/url');
-
+const {getByShortUrl, newUrlRepo, getUrlsByUsername, getAllUrls} = require('../repository/urlRepository');
+const {getByToken} = require('../repository/userRepository');
 
 const getMyUrlsService = async (token) =>{
    
 
     try {
-        const user = await User.findOne({ token });
+        const user = getByToken(token);
         if (!user) {
             throw new Error('Invaled Token');
         }
 
-        const urls = await Url.find({ createdBy: user.username });
+        getUrlsByUsername();
         
 
-        return urls;
     } catch (err) {
         throw new Error('Server Error');
     }
@@ -23,7 +23,7 @@ const getMyUrlsService = async (token) =>{
 
 const listUrlsService = async ()=>{
     try {
-        const urls = await Url.find();
+        const urls = getAllUrls();
         return urls;
     } catch (err) {
         throw new Error('Server Error');

@@ -1,33 +1,31 @@
-const User = require('../models/user');
 const bcrypt = require('bcrypt');
 
 const { generateToken } = require('../utils/generatetoken');
+const {getByShortUrl} = require('../repository/urlRepository');
+const {getByToken , getByUsername, newUserRepo} = require('../repository/userRepository');
+
+
+
 
 const registerUserService = async ({ username, password }) => {
   if (!username || !password) {
     throw new Error('Username and password required');
   }
 
-  const existingUser = await User.findOne({ username });
+  const existingUser =  await getByUsername(username);
 
   if (existingUser) {
     throw new Error('Username already exists');
   }
 
-  const token = generateToken();
+  const token = await generateToken();
 
-  const salt = await bcrypt.genSalt(10);
-  const hash = await bcrypt.hash(password ,salt);
+  
 
-  const newUser = new User({
+  const newUser = await newUserRepo(username,password,token);
 
-    username, 
-    password : hash,
-    token 
-
-   });
    console.log(newUser);
-  await newUser.save();
+  
 
   return {
     message: 'User registered successfully',
@@ -41,7 +39,7 @@ const loginUserService = async ({ username, password }) => {
     throw new Error('Username and password required');
   }
 
-  const user = await User.findOne({ username });
+  const user = await getByUsername(username);
 
   if (!user) {
     throw new Error('User not found');

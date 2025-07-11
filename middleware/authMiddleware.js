@@ -8,6 +8,9 @@ const authMiddleware = async (req, res, next) => {
   }
 
   try {
+
+    const user = await User.findOne({ token });
+    req.user = user ;
    next();
   } 
   
