@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "index.js",
-    "dev": "inde.js",
+    "dev": "index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -16,6 +16,7 @@
     "dotenv": "^16.6.1",
     "express": "^5.1.0",
     "mongoose": "^8.16.2",
+    "path": "^0.12.7",
     "pino": "^9.7.0",
     "readline-sync": "^1.4.10",
     "router": "^2.2.0"

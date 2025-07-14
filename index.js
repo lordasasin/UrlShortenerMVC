@@ -17,7 +17,6 @@ app.use(express.json());
 
 
 
-
 app.use("/user" , require('./router/userRouter'));
 app.use("/auth" , require('./router/authRouter'));
 app.use("/url" , require('./router/urlRouter'));
