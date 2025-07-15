@@ -12,15 +12,15 @@ This project is a simple URL Shortener. It helps you turn long URLs into short o
 
 ## Folder Structure
 
-├── controllers/ # Gets requests and calls services
-├── middleware/ # Checks token before request
-├── models/ # MongoDB schemas
-├── repository/ # MongoDB database functions
-├── routers/ # API route definitions
-├── services/ # Business logic functions
-├── utils/ # f  Functions (generateToken, logger)
-├── .env # Environment variables
-└── index.js # Main server file
+- controllers/ # Gets requests and calls services
+- middleware/ # Checks token before request
+- models/ # MongoDB schemas
+- repository/ # MongoDB database functions
+- routers/ # API route definitions
+- services/ # Business logic functions
+- utils/ # f  Functions (generateToken, logger)
+─ .env # Environment variables
+─ index.js # Main server file
 
 ## Technologies Used
 
