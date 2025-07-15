@@ -18,9 +18,9 @@ This project is a simple URL Shortener. It helps you turn long URLs into short o
 - repository/ # MongoDB database functions
 - routers/ # API route definitions
 - services/ # Business logic functions
-- utils/ # f  Functions (generateToken, logger)
-─ .env # Environment variables
-─ index.js # Main server file
+- utils/ # Functions (generateToken, logger)
+- .env # Environment variables
+- index.js # Main server file
 
 ## Technologies Used
 
