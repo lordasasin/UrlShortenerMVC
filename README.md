@@ -42,8 +42,8 @@ This project is a simple URL Shortener. It helps you turn long URLs into short o
 
 ## 🚀 How to Use
 
--If you don’t have Postman, please install it to test API endpoints.
--start with node index.js in your terminal
+- If you don’t have Postman, please install it to test API endpoints.
+- Start with node index.js in your terminal
 
 - [POST] http://localhost:3000/auth/register  Body: { username, password }
 - [POST] http://localhost:3000/auth/login     Body: { username, password }
