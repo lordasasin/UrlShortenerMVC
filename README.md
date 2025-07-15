@@ -32,13 +32,13 @@ This project is a simple URL Shortener. It helps you turn long URLs into short o
 
 ## How to İnstall
 
-Download the project, install dependencies, configure environment variables, and run the server:
+- Download the project, install dependencies, configure environment variables, and run the server:
 
--git clone <URLSHORTENERMVC-main>
--cd URLSHORTENERMVC-main
--npm install express mongoose dotenv pino
--PORT=3000
--MONGO_CONNECT=<your-mongodb-connection-string>
+- git clone <URLSHORTENERMVC-main>
+- cd URLSHORTENERMVC-main
+- npm install express mongoose dotenv pino
+- PORT=3000
+- MONGO_CONNECT=<your-mongodb-connection-string>
 
 ## 🚀 How to Use
 
