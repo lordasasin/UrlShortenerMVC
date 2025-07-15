@@ -45,12 +45,12 @@ Download the project, install dependencies, configure environment variables, and
 -If you don’t have Postman, please install it to test API endpoints.
 -start with node index.js in your terminal
 
--[POST] http://localhost:3000/auth/register  Body: { username, password }
--[POST] http://localhost:3000/auth/login     Body: { username, password }
--[POST] http://localhost:3000/url/shorten   Body: { token, originalUrl }
--[GET]  http://localhost:3000/user/list → No token required, everyone can view the URLs.
--[GET]  http://localhost:3000/user/myurls → Shows URLs specific to the logged-in user.
--[GET]  http://localhost:3000/url/:shortUrl  → Redirects using the provided short URL.
+- [POST] http://localhost:3000/auth/register  Body: { username, password }
+- [POST] http://localhost:3000/auth/login     Body: { username, password }
+- [POST] http://localhost:3000/url/shorten   Body: { token, originalUrl }
+- [GET]  http://localhost:3000/user/list → No token required, everyone can view the URLs.
+- [GET]  http://localhost:3000/user/myurls → Shows URLs specific to the logged-in user.
+- [GET]  http://localhost:3000/url/:shortUrl  → Redirects using the provided short URL.
 
 
 
