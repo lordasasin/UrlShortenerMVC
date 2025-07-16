@@ -4,11 +4,11 @@ This project is a simple URL Shortener. It helps you turn long URLs into short o
 
 ## Features
 
-- Shorten long URLs  
-- Redirect with short URLs  
-- Show user’s own URL list  
-- Simple logging system  
-- Token check with middleware  
+- Shorten long URLs
+- Redirect with short URLs
+- Show user’s own URL list
+- Simple logging system
+- Token check with middleware
 
 ## Folder Structure
 
@@ -25,9 +25,9 @@ This project is a simple URL Shortener. It helps you turn long URLs into short o
 ## Technologies Used
 
 - Node.js
-- dotenv  
-- Express.js  
-- MongoDB (Mongoose)  
+- dotenv
+- Express.js
+- MongoDB (Mongoose)
 - Pino (for logging)
 
 ## How to İnstall
@@ -45,13 +45,9 @@ This project is a simple URL Shortener. It helps you turn long URLs into short o
 - If you don’t have Postman, please install it to test API endpoints.
 - Start with node index.js in your terminal
 
-- [POST] http://localhost:3000/auth/register  Body: { username, password }
-- [POST] http://localhost:3000/auth/login     Body: { username, password }
-- [POST] http://localhost:3000/url/shorten   Body: { token, originalUrl }
-- [GET]  http://localhost:3000/user/list → No token required, everyone can view the URLs.
-- [GET]  http://localhost:3000/user/myurls → Shows URLs specific to the logged-in user.
-- [GET]  http://localhost:3000/url/:shortUrl  → Redirects using the provided short URL.
-
-
-
-
+- [POST] http://localhost:3000/auth/register Body: { username, password }
+- [POST] http://localhost:3000/auth/login Body: { username, password }
+- [POST] http://localhost:3000/url/shorten Body: { token, originalUrl }
+- [GET] http://localhost:3000/user/list → No token required, everyone can view the URLs.
+- [GET] http://localhost:3000/user/myurls → Shows URLs specific to the logged-in user.
+- [GET] http://localhost:3000/url/:shortUrl → Redirects using the provided short URL.
