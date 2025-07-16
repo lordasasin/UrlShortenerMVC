@@ -15,10 +15,12 @@
     "bcrypt": "^6.0.0",
     "dotenv": "^16.6.1",
     "express": "^5.1.0",
+    "jest": "^30.0.4",
     "mongoose": "^8.16.2",
     "path": "^0.12.7",
     "pino": "^9.7.0",
     "readline-sync": "^1.4.10",
-    "router": "^2.2.0"
+    "router": "^2.2.0",
+    "supertest": "^7.1.3"
   }
 }
