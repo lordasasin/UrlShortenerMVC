@@ -1,29 +1,41 @@
 const { app, mongoose } = require("../index");
 const request = require("supertest");
-const dotenv = require("dotenv");
+const config = require("../config/config");
+
+
 
 beforeAll(async () => {
-  await mongoose.connect(process.env.MONGO_CONNECT);
+
+  await mongoose.connect(config.MONGODUMMY_CONNECT);
+  
 });
 
+afterAll(async () => {
+  await mongoose.connection.dropDatabase();
+
+})
+
+
+
 describe("register", () => {
-  it("POST /register is it working", async () => {
-    const res = await request(app).post("/register").send({
+  it("POST /auth/register is it working", async () => {
+    const res = await request(app).post("/auth/register").send({
       username: "yusuf",
       password: "yusuf123",
     });
 
-    expect(res.statusCode).toBe(200);
+    expect(res.statusCode).toBe(201);
   });
 });
 
 describe("login", () => {
-  it("POST /login is it working", async () => {
-    const res = await request(app).post("/login").send({
+  it("POST /auth/login is it working", async () => {
+    const res = await request(app).post("/auth/login").send({
       username: "yusuf",
       password: "yusuf123",
     });
 
     expect(res.statusCode).toBe(200);
+
   });
 });
