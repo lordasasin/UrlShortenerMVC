@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 
 const { generateToken } = require('../utils/generatetoken');
 const {getByShortUrl} = require('../repository/urlRepository');
-const {getByToken , getByUsername, newUserRepo} = require('../repository/userRepository');
+const {getByToken , getByUsername, addUserRepo} = require('../repository/userRepository');
 
 
 
@@ -22,7 +22,7 @@ const registerUserService = async ({ username, password }) => {
 
   
 
-  const newUser = await newUserRepo(username,password,token);
+  const newUser = await addUserRepo(username,password,token);
 
    console.log(newUser);
   

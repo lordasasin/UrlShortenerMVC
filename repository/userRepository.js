@@ -9,7 +9,7 @@ const getByUsername = async (username) => {
     return await User.findOne({ username });
 };
 
-const newUserRepo = async (username, password, token) => {
+const addUserRepo = async (username, password, token) => {
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
 
@@ -26,5 +26,5 @@ const newUserRepo = async (username, password, token) => {
 module.exports = {
     getByToken,
     getByUsername,
-    newUserRepo
+    addUserRepo
 };

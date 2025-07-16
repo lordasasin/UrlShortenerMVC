@@ -2,10 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 dotenv.config();
-const pino = require('pino');
-const logger = pino();
+const {logg} = require('./utils/logger');
 const app = express();
 app.use(express.json());
+const { authMiddleware } = require('./middleware/authMiddleware');
 
 
 
@@ -17,9 +17,10 @@ app.use(express.json());
 
 
 
-app.use("/user" , require('./router/userRouter'));
+
+app.use("/user" , authMiddleware , require('./router/userRouter'));
 app.use("/auth" , require('./router/authRouter'));
-app.use("/url" , require('./router/urlRouter'));
+app.use("/url" , authMiddleware ,require('./router/urlRouter'));
 
 
 app.listen(process.env.PORT, () => {
@@ -30,7 +31,9 @@ app.listen(process.env.PORT, () => {
 
 
     mongoose.connection.on('error', err => {
-        logger.error(err);
+
+      logg(err);
+
       });
 
     console.log(`Server running on PORT ${process.env.PORT}`);
