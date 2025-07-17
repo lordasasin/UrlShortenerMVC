@@ -15,16 +15,18 @@ afterAll(async () => {
 
 })
 
-describe("myurls", () => {
-  it("GET /myurls is it working", async () => {
-    const res = await request(app).get("/user/list");
-    expect(res.statusCode).toBe(200);
-  }); 
-});
+describe("user", () => {
+  describe("myurls", () => {
+    it("GET /user/list is it working", async () => {
+      const res = await request(app).get("/user/list");
+      expect(res.statusCode).toBe(200);
+    });
+  });
 
-describe("list", () => {
-  it("GET /list is it working", async () => {
-    const res = await request(app).get("/user/myurls");
-    expect(res.statusCode).toBe(200);
+  describe("list", () => {
+    it("GET /user/myurls is it working", async () => {
+      const res = await request(app).get("/user/myurls");
+      expect(res.statusCode).toBe(200);
+    });
   });
 });
