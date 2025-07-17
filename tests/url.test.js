@@ -1,6 +1,7 @@
 const { app, mongoose } = require("../index");
 const request = require("supertest");
 const config = require("../config/config");
+const { shortenUrl } = require("../controllers/url");
 
 
 
@@ -27,7 +28,7 @@ describe("shorten", () => {
 
 describe("shortUrl", () => {
   it("POST /shortUrl is it working", async () => {
-    const res = await request(app).post("/shortUrl").send({});
+    const res = await request(app).post("/shortUrl").send({shortUrl});
     expect(res.statusCode).toBe(200);
   });
 });
