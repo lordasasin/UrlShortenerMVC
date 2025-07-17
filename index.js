@@ -10,7 +10,7 @@ const { authMiddleware } = require("./middleware/authMiddleware");
 
 app.use("/user", authMiddleware, require("./router/user"));
 app.use("/auth", require("./router/auth"));
-app.use("/url", authMiddleware, require("./router/url"));
+app.use("/url",  require("./router/url"));
 
 
 
