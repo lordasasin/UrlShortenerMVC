@@ -1,7 +1,6 @@
 const { app, mongoose } = require("../index");
 const request = require("supertest");
 const config = require("../config/config");
-const { shortenUrl } = require("../controllers/url");
 
 
 
