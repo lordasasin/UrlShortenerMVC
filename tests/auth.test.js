@@ -1,16 +1,18 @@
-const { app, mongoose } = require("../index");
+const { app ,mongoose } = require("../index");
 const request = require("supertest");
 const config = require("../config/config");
 
+
+
 beforeAll(async () => {
+
   await mongoose.connect(config.MONGODUMMY_CONNECT);
 });
 
-afterEach(async () => {
-  await mongoose.connection.dropDatabase();
-});
-
 afterAll(async () => {
+  
+  await mongoose.connection.dropDatabase();
+
   await mongoose.connection.close();
 });
 

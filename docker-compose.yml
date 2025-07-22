@@ -8,7 +8,9 @@ services:
     env_file:
       - .env
     volumes:
-      - .:/app
+      - .:/app     
+      - /app/node_modules
+
 
   mongo:
     image: mongo
