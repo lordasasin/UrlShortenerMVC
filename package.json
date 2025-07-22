@@ -6,7 +6,7 @@
     "format": "prettier --write .",
     "start": "index.js",
     "dev": "index.js",
-    "test": "jest"
+    "test": "jest --runInBand"
   },
   "keywords": [],
   "author": "",

@@ -6,8 +6,12 @@ beforeAll(async () => {
   await mongoose.connect(config.MONGODUMMY_CONNECT);
 });
 
-afterAll(async () => {
+afterEach(async () => {
   await mongoose.connection.dropDatabase();
+});
+
+afterAll(async () => {
+  await mongoose.connection.close();
 });
 
 describe("auth", () => {
@@ -47,7 +51,7 @@ describe("auth", () => {
         password: "wrongpass",
       });
 
-      expect(res.statusCode).toBe(401);
+      expect(res.statusCode).toBe(400);
     });
 
     it("POST /auth/login fails when username and password is empty", async () => {

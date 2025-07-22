@@ -6,7 +6,7 @@ const shortenUrlService = async (token, originalUrl) => {
   if (!token || !originalUrl) {
     throw new Error("Token and original URL are required");
   }
-
+  
   const user = await getByToken(token);
   if (!user) {
     throw new Error("Invalid token");
