@@ -1,7 +1,4 @@
-const {
-  shortenUrlService,
-  redirectUrlService,
-} = require("../services/url");
+const { shortenUrlService, redirectUrlService } = require("../services/url");
 
 const shortenUrl = async (req, res) => {
   const { token, originalUrl } = req.body;

@@ -26,5 +26,5 @@ const addUser = async (username, password, token) => {
 module.exports = {
   getByToken,
   getByUsername,
-  addUser
+  addUser,
 };

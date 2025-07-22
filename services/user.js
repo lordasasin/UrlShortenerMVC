@@ -1,7 +1,4 @@
-const {
-  getUrlsByUsername,
-  findAllUrls,
-} = require("../repository/url");
+const { getUrlsByUsername, findAllUrls } = require("../repository/url");
 const { getByToken } = require("../repository/user");
 
 const getMyUrlsService = async (token) => {
@@ -13,7 +10,7 @@ const getMyUrlsService = async (token) => {
 
     getUrlsByUsername();
   } catch (err) {
-    throw new Error("Server Error" , err);
+    throw new Error("Server Error", err);
   }
 };
 

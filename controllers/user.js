@@ -1,7 +1,4 @@
-const {
-  getMyUrlsService,
-  listUrlsService,
-} = require("../services/user");
+const { getMyUrlsService, listUrlsService } = require("../services/user");
 
 const getMyUrls = async (req, res) => {
   const { token } = req.params;

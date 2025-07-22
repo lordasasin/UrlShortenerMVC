@@ -1,10 +1,7 @@
 const bcrypt = require("bcrypt");
 
 const { generateToken } = require("../utils/generatetoken");
-const {
-  getByUsername,
-  addUser
-} = require("../repository/user");
+const { getByUsername, addUser } = require("../repository/user");
 
 const registerUserService = async ({ username, password }) => {
   if (!username || !password) {

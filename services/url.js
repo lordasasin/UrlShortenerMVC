@@ -1,5 +1,5 @@
 const { generateToken } = require("../utils/generatetoken");
-const { findShortUrl , createUrl } = require("../repository/url");
+const { findShortUrl, createUrl } = require("../repository/url");
 const { getByToken } = require("../repository/user");
 
 const shortenUrlService = async (token, originalUrl) => {

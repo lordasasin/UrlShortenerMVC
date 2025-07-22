@@ -2,23 +2,15 @@ const { app, mongoose } = require("../index");
 const request = require("supertest");
 const config = require("../config/config");
 
-
-
 beforeAll(async () => {
-
   await mongoose.connect(config.MONGODUMMY_CONNECT);
-  
 });
 
 afterAll(async () => {
   await mongoose.connection.dropDatabase();
-
-})
-
-
+});
 
 describe("auth", () => {
-
   describe("register", () => {
     it("POST /auth/register is it working", async () => {
       const res = await request(app).post("/auth/register").send({
@@ -27,6 +19,15 @@ describe("auth", () => {
       });
 
       expect(res.statusCode).toBe(201);
+    });
+
+    it("POST /auth/register fails when username and password is empty", async () => {
+      const res = await request(app).post("/auth/register").send({
+        username: "",
+        password: "",
+      });
+
+      expect(res.statusCode).toBe(400);
     });
   });
 
@@ -39,6 +40,23 @@ describe("auth", () => {
 
       expect(res.statusCode).toBe(200);
     });
+
+    it("POST /auth/login fails when user input wrong username and password", async () => {
+      const res = await request(app).post("/auth/login").send({
+        username: "wronguser",
+        password: "wrongpass",
+      });
+
+      expect(res.statusCode).toBe(401);
+    });
+
+    it("POST /auth/login fails when username and password is empty", async () => {
+      const res = await request(app).post("/auth/login").send({
+        username: "",
+        password: "",
+      });
+
+      expect(res.statusCode).toBe(400);
+    });
   });
-  
 });
