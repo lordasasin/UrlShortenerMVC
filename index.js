@@ -9,10 +9,10 @@ const { authMiddleware } = require("./middleware/authMiddleware");
 const loggerReqRes = require('./middleware/loggerReqRes');
 app.use(express.json());       
 
-
-app.use("/user", loggerReqRes ,authMiddleware, require("./router/user"));
-app.use("/auth",loggerReqRes, require("./router/auth"));
-app.use("/url", loggerReqRes, require("./router/url"));
+app.use(loggerReqRes)
+app.use("/user" ,authMiddleware, require("./router/user"));
+app.use("/auth", require("./router/auth"));
+app.use("/url", require("./router/url"));
 
 app.listen(config.PORT, () => {
   mongoose

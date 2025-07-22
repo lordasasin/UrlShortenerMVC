@@ -1,9 +1,13 @@
+const pino = require('pino')
+const logger = pino();
+
 const loggerReqRes = (req, res, next) => {
     const originalSend = res.send;
   
     res.send = function (body) {
-      console.log(`${req.method} ${req.originalUrl} ${JSON.stringify(req.body)} → ${res.statusCode}`);
-      console.log(JSON.stringify(req.headers));
+      logger.info(`${req.method} ${req.originalUrl} ${JSON.stringify(req.body)} → ${body}`);
+      logger.info(JSON.stringify(req.headers));
+
 
       return originalSend.call(this, body);
     };
