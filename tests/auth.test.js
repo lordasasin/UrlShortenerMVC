@@ -1,6 +1,7 @@
 const { app ,mongoose } = require("../index");
 const request = require("supertest");
 const config = require("../config/config");
+const user = require('../models/user');
 
 
 
@@ -12,8 +13,7 @@ beforeAll(async () => {
 
 afterAll(async () => {
   
-  await mongoose.connection.dropDatabase();
-
+  await user.deleteMany();
   await mongoose.connection.close();
 });
 
