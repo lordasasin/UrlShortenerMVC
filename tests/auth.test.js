@@ -10,10 +10,10 @@ beforeAll(async () => {
   await mongoose.connect(config.MONGODUMMY_CONNECT);
 });
 
-
+afterEach(async ()=>{  await user.deleteMany();
+})
 afterAll(async () => {
   
-  await user.deleteMany();
   await mongoose.connection.close();
 });
 
@@ -40,6 +40,10 @@ describe("auth", () => {
 
   describe("login", () => {
     it("POST /auth/login is it working", async () => {
+      await request(app).post("/auth/register").send({
+          username: "yusuf",
+          password: "yusuf123",
+        });
       const res = await request(app).post("/auth/login").send({
         username: "yusuf",
         password: "yusuf123",
