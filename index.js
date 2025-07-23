@@ -6,11 +6,11 @@ const config = require("./config/config");
 const { logg } = require("./utils/logger");
 const app = express();
 const { authMiddleware } = require("./middleware/authMiddleware");
-const loggerReqRes = require('./middleware/loggerReqRes');
-app.use(express.json());       
+const loggerReqRes = require("./middleware/loggerReqRes");
+app.use(express.json());
 
-app.use(loggerReqRes)
-app.use("/user" ,authMiddleware, require("./router/user"));
+app.use(loggerReqRes);
+app.use("/user", authMiddleware, require("./router/user"));
 app.use("/auth", require("./router/auth"));
 app.use("/url", require("./router/url"));
 

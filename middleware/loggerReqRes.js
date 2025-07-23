@@ -1,25 +1,24 @@
-const pino = require('pino')
+const pino = require("pino");
 const logger = pino();
 
 const loggerReqRes = (req, res, next) => {
-    const originalSend = res.send;
-  
-    res.send = function (body) {
-      logger.info(JSON.stringify({
+  const originalSend = res.send;
+
+  res.send = function (body) {
+    logger.info(
+      JSON.stringify({
         method: req.method,
         url: req.originalUrl,
         body: req.body,
         response: body,
-        headers: req.headers
-      }));
-      
+        headers: req.headers,
+      }),
+    );
 
-
-      return originalSend.call(this, body);
-    };
-  
-    next();
+    return originalSend.call(this, body);
   };
-  
-  module.exports = loggerReqRes;
-  
+
+  next();
+};
+
+module.exports = loggerReqRes;

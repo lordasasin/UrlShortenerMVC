@@ -1,19 +1,16 @@
-const { app ,mongoose } = require("../index");
+const { app, mongoose } = require("../index");
 const request = require("supertest");
 const config = require("../config/config");
-const user = require('../models/user');
-
-
+const user = require("../models/user");
 
 beforeAll(async () => {
-
   await mongoose.connect(config.MONGODUMMY_CONNECT);
 });
 
-afterEach(async ()=>{  await user.deleteMany();
-})
+afterEach(async () => {
+  await user.deleteMany();
+});
 afterAll(async () => {
-  
   await mongoose.connection.close();
 });
 
@@ -41,9 +38,9 @@ describe("auth", () => {
   describe("login", () => {
     it("POST /auth/login is it working", async () => {
       await request(app).post("/auth/register").send({
-          username: "yusuf",
-          password: "yusuf123",
-        });
+        username: "yusuf",
+        password: "yusuf123",
+      });
       const res = await request(app).post("/auth/login").send({
         username: "yusuf",
         password: "yusuf123",
