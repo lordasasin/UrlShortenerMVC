@@ -1,18 +1,25 @@
 const { app, mongoose } = require("../index");
 const request = require("supertest");
 const config = require("../config/config");
+const url = require('../models/url');
 
 beforeAll(async () => {
   await mongoose.connect(config.MONGODUMMY_CONNECT);
+
+    const registerRes = await request(app).post("/auth/register").send({
+      username: "testuser",
+      password: "123456",
+    });
+    
+    token = `Bearer ${registerRes.body.token}`;
 });
 
 afterEach(async () => {
-  await mongoose.connection.dropDatabase();
+  await url.deleteMany();
 });
 
 
 afterAll(async () => {
-  await mongoose.connection.dropDatabase();
 
   await mongoose.connection.close();
 });
@@ -25,7 +32,8 @@ describe("url", () => {
       const res = await request(app).post("/url/shorten").send(
         originalUrl = "https://www.youtube.com/results?search_query=ayya%C5%9F"
           
-      );
+      ).set("Authorization", token);
+
       exampleShortUrl = res.body.shortUrl;
 
       expect(res.statusCode).toBeGreaterThan(200);
