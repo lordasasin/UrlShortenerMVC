@@ -5,8 +5,14 @@ const loggerReqRes = (req, res, next) => {
     const originalSend = res.send;
   
     res.send = function (body) {
-      logger.info(`${req.method} ${req.originalUrl} ${JSON.stringify(req.body)} → ${body}`);
-      logger.info(JSON.stringify(req.headers));
+      logger.info(JSON.stringify({
+        method: req.method,
+        url: req.originalUrl,
+        body: req.body,
+        response: body,
+        headers: req.headers
+      }));
+      
 
 
       return originalSend.call(this, body);
