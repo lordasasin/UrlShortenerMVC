@@ -17,6 +17,7 @@
     "dotenv": "^16.6.1",
     "express": "^5.1.0",
     "jest": "^30.0.4",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.16.2",
     "path": "^0.12.7",
     "pino": "^9.7.0",

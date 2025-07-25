@@ -1,19 +1,24 @@
-const { getMyUrlsService, listUrlsService } = require("../services/user");
+const { getUserUrls, listAllUrls } = require("../services/user");
 
 const getMyUrls = async (req, res) => {
-  const { token } = req.params;
+
+  if (!req.user) return res.status(401).json({ error: "Unauthorized" });
 
   try {
-    const urls = await getMyUrlsService(token);
-    res.status(200).json(urls);
+    const userId = req.user.id;
+
+    const urls = await getUserUrls(userId);
+
+    res.status(200).json({ myurls: urls });
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    console.log(err);
+    res.status(500).json({ error: err.message });
   }
 };
 
 const listUrls = async (req, res) => {
   try {
-    const urls = await listUrlsService();
+    const urls = await listAllUrls();
     res.status(200).json(urls);
   } catch (err) {
     res.status(500).json({ error: err.message });

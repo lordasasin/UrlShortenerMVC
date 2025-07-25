@@ -1,18 +1,21 @@
-const User = require("../models/user");
+const jwt = require("jsonwebtoken");
+const config = require("../config/config");
+const authMiddleware = (req, res, next) => {
+  const authHeader = req.headers["authorization"];
 
-const authMiddleware = async (req, res, next) => {
-  const token = req.headers["authorization"];
-
-  if (!token) {
-    return res.status(401).json({ error: "Token not exist!!!!!" });
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res.status(401).json({ error: "Unauthorized" });
   }
 
+  const token = authHeader.split(" ")[1];
+
   try {
-    const user = await User.findOne({ token });
-    req.user = user;
+    const decoded = jwt.verify(token, config.JWT_SECRET_KEY);
+    req.user = decoded;
+
     next();
   } catch (err) {
-    return res.status(500).json({ error: err });
+    return res.status(403).json({ error: "Invalid token" });
   }
 };
 

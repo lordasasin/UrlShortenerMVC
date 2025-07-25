@@ -1,20 +1,21 @@
 const { getUrlsByUsername, findAllUrls } = require("../repository/url");
-const { getByToken } = require("../repository/user");
-
-const getMyUrlsService = async (token) => {
+const User = require("../models/user");
+const getUserUrls = async (userId) => {
   try {
-    const user = getByToken(token);
+    const user = await User.findById(userId);
+
     if (!user) {
-      throw new Error("Invaled Token");
+      throw new Error("Invalid user");
     }
 
-    getUrlsByUsername();
+    const urls = await getUrlsByUsername(user.username);
+    return urls;
   } catch (err) {
-    throw new Error("Server Error", err);
+    throw new Error("Server Error: " + err.message);
   }
 };
 
-const listUrlsService = async () => {
+const listAllUrls = async () => {
   try {
     const urls = findAllUrls();
     return urls;
@@ -24,6 +25,6 @@ const listUrlsService = async () => {
 };
 
 module.exports = {
-  getMyUrlsService,
-  listUrlsService,
+  getUserUrls,
+  listAllUrls,
 };

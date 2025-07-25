@@ -1,14 +1,17 @@
 const { generateToken } = require("../utils/generatetoken");
 const { findShortUrl, createUrl } = require("../repository/url");
 const { getByToken } = require("../repository/user");
+const user = require("../models/user");
 
-const shortenUrlService = async (token, originalUrl) => {
-  if (!token || !originalUrl) {
-    throw new Error("Token and original URL are required");
+const urlShorten = async (token ,originalUrl) => {
+ 
+
+  if (!originalUrl) {
+    throw new Error("Original URL are required");
   }
 
-  const user = await getByToken(token);
-  if (!user) {
+  const User = await getByToken(token);
+  if (!User) {
     throw new Error("Invalid token");
   }
 
@@ -16,11 +19,11 @@ const shortenUrlService = async (token, originalUrl) => {
   await createUrl(shortUrl, originalUrl, user);
 
   return {
-    shortUrl: `http://localhost:${process.env.PORT}/${shortUrl}`,
+    shortUrl: `http://localhost:${process.env.PORT}/url/${shortUrl}`,
   };
 };
 
-const redirectUrlService = async (shortUrl) => {
+const urlRedirect = async (shortUrl) => {
   const url = await findShortUrl(shortUrl);
 
   if (!url) {
@@ -31,6 +34,6 @@ const redirectUrlService = async (shortUrl) => {
 };
 
 module.exports = {
-  shortenUrlService,
-  redirectUrlService,
+  urlShorten,
+  urlRedirect,
 };

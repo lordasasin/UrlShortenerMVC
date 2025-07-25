@@ -1,48 +1,103 @@
 const { app, mongoose } = require("../index");
 const request = require("supertest");
 const config = require("../config/config");
-const user = require("../models/user");
+const { registerTest } = require("../test_utils/auth.test.utils");
+const jwt = require('jsonwebtoken');
+const User = require("../models/user");
+const Url = require("../models/url");
 
 let token;
 
 beforeAll(async () => {
-  await mongoose.connect(config.MONGODUMMY_CONNECT);
+  await mongoose.createConnection(config.MONGODUMMY_CONNECT);
 
-  const registerRes = await request(app).post("/auth/register").send({
-    username: "testuser",
-    password: "123456",
-  });
-
-  token = `Bearer ${registerRes.body.token}`;
 });
 
-afterEach(async () => {
-  await user.deleteMany();
+beforeEach(async () => {
+  await User.deleteMany();
+  await Url.deleteMany();
 });
 
 afterAll(async () => {
   await mongoose.connection.dropDatabase();
 
-  await mongoose.connection.close();
+  await mongoose.disconnect();
 });
 
-describe("user", () => {
-  describe("list", () => {
-    it("GET /user/list is it working", async () => {
-      const res = await request(app)
-        .get("/user/list")
-        .set("Authorization", token);
+describe("User", () => {
+  it("GET /user/myurls is it working", async () => {
+    const { token } = await registerTest("yusuf", "yusuf123");
+    const res = await request(app)
+      .get("/user/myurls")
+      .set("Authorization", token);
 
-      expect(res.statusCode).toBe(200);
-    });
+    expect(res.body).not.toEqual({});
+    expect(res.statusCode).toBe(200);
+   
   });
 
-  describe("myurls", () => {
-    it("GET /user/myurls is it working", async () => {
-      const res = await request(app)
-        .get("/user/myurls")
-        .set("Authorization", token);
+  it("GET /user/myurls is empty", async () => {
+    const { token } = await registerTest("yusuf", "yusuf123");
+    const res = await request(app)
+      .get("/user/myurls")
+      .set("Authorization", token);
+
+      expect(res.body).toEqual({ myurls: [] });
       expect(res.statusCode).toBe(200);
-    });
+
+   
   });
+
+  it("GET /user/myurls is with wrong token", async () => {
+    const res = await request(app)
+      .get("/user/myurls")
+      .set("Authorization", "qwe123");
+
+      expect(res.body.error).toBeDefined();
+
+      expect(res.statusCode).toBe(401);
+
+   
+  });
+
+  it("GET /user/myurls without token", async () => {
+    res = await request(app).get("/user/myurls");
+    expect(res.statusCode).toBe(401);
+    expect(res.body.error).toBeDefined();
+   
+  });
+
+  it("GET /user/myurls with expired token", async () => {
+    const expiredToken = jwt.sign({ id: "fakeid" }, config.JWT_SECRET_KEY, { expiresIn: -10 });
+    const res = await request(app)
+      .get("/user/myurls")
+      .set("Authorization", `Bearer ${expiredToken}`);
+    expect(res.statusCode).toBe(403);
+    expect(res.body.error).toBeDefined();
+  });
+
+
+   
+  
+
+  
+
+
+  it("GET /user/list is it working", async () => {
+    const res = await request(app).get("/user/list");
+
+    
+    expect(res.body).not.toEqual({});
+    expect(res.statusCode).toBe(200);
+  });
+
+  it("GET /user/list is empty", async () => {
+    const res = await request(app).get("/user/list");
+
+    
+    expect(res.body).toEqual([]);
+    expect(res.statusCode).toBe(200);
+  });
+
+ 
 });

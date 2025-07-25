@@ -1,18 +1,47 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
-dotenv.config();
+
 const config = require("./config/config");
 const { logg } = require("./utils/logger");
 const app = express();
-const { authMiddleware } = require("./middleware/authMiddleware");
 const loggerReqRes = require("./middleware/loggerReqRes");
 app.use(express.json());
+const path = require("path");
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "view")));
 
 app.use(loggerReqRes);
-app.use("/user", authMiddleware, require("./router/user"));
+app.use("/user", require("./router/user"));
 app.use("/auth", require("./router/auth"));
 app.use("/url", require("./router/url"));
+
+app.get("/home", (req, res) => {
+  res.sendFile(path.join(__dirname, "views", "home.html"));
+});
+
+app.get("/login", (req, res) => {
+  res.sendFile(path.join(__dirname, "views", "login.html"));
+});
+
+app.get("/register", (req, res) => {
+  res.sendFile(path.join(__dirname, "views", "register.html"));
+});
+
+app.get("/shorten", (req, res) => {
+  res.sendFile(path.join(__dirname, "views", "shorten.html"));
+});
+
+app.get("/list", (req, res) => {
+  res.sendFile(path.join(__dirname, "views", "allUrls.html"));
+});
+
+app.get("/myurls", (req, res) => {
+  res.sendFile(path.join(__dirname, "views", "myurls.html"));
+});
+
+app.get("/shorten/adv", (req, res) => {
+  res.sendFile(path.join(__dirname, "views", "adv.html"));
+});
 
 app.listen(config.PORT, () => {
   mongoose

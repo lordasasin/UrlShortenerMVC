@@ -1,9 +1,9 @@
 const bcrypt = require("bcrypt");
 
-const { generateToken } = require("../utils/generatetoken");
+const generateJwtToken = require("../utils/generateJwtToken");
 const { getByUsername, addUser } = require("../repository/user");
 
-const registerUserService = async ({ username, password }) => {
+const userRegister = async ({ username, password }) => {
   if (!username || !password) {
     throw new Error("Username and password required");
   }
@@ -14,11 +14,12 @@ const registerUserService = async ({ username, password }) => {
     throw new Error("Username already exists");
   }
 
-  const token = await generateToken();
+  const newUser = await addUser(username, password);
 
-  const newUser = await addUser(username, password, token);
-
-  console.log(newUser);
+  const token = generateJwtToken({
+    id: newUser._id,
+    username: newUser.username,
+  });
 
   return {
     message: "User registered successfully",
@@ -26,13 +27,12 @@ const registerUserService = async ({ username, password }) => {
   };
 };
 
-const loginUserService = async ({ username, password }) => {
+const userLogin = async ({ username, password }) => {
   if (!username || !password) {
     throw new Error("Username and password required");
   }
 
   const user = await getByUsername(username);
-
   if (!user) {
     throw new Error("User not found");
   }
@@ -40,14 +40,15 @@ const loginUserService = async ({ username, password }) => {
   if (!isValid) {
     throw new Error("Incorrect password");
   }
+  const token = generateJwtToken({ id: user._id, username: user.username });
 
   return {
     message: "Login successful",
-    token: user.token,
+    token: token,
   };
 };
 
 module.exports = {
-  registerUserService,
-  loginUserService,
+  userRegister,
+  userLogin,
 };

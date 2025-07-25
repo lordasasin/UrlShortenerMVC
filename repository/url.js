@@ -19,7 +19,7 @@ const createUrl = async (shortUrl, originalUrl, user) => {
 };
 
 const getUrlsByUsername = async (username) => {
-  return await Url.find({ createdBy: username });
+  return Url.find({ createdBy: username });
 };
 
 module.exports = {

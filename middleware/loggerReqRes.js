@@ -3,6 +3,7 @@ const logger = pino();
 
 const loggerReqRes = (req, res, next) => {
   const originalSend = res.send;
+  
 
   res.send = function (body) {
     logger.info(
