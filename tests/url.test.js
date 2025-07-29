@@ -4,6 +4,7 @@ const config = require("../config/config");
 const User = require("../models/user");
 const Url = require("../models/url");
 const { registerTest } = require("../test_utils/auth.test.utils");
+const {shortUrl} = require('../test_utils/url.test.utils');
 
 let exampleShortUrl;
 beforeAll(async () => {
@@ -102,9 +103,10 @@ describe("url", () => {
 
 
     it("POST /url/shortUrl is it working", async () => {
+    const forexample = await shortUrl();
       const res = await request(app)
         .post("/url/shortUrl")
-        .send({exampleShortUrl })
+        .send({forexample })
 
         expect(res.statusCode).toBeGreaterThan(200);
     });

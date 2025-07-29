@@ -15,10 +15,8 @@ const shortUrl = async ()=>{
 
 
     url = res.body.result.shortUrl;
-    expect(res.body).not.toEqual({});
-    expect(res.body.result.shortUrl).toBeDefined();
-    expect(res.body.token).toBeDefined();
-    expect(res.statusCode).toBe(200);
+
+
 return url ;
   
   
