@@ -1,7 +1,7 @@
 const { app, mongoose } = require("../index");
 const request = require("supertest");
 const config = require("../config/config");
-const { registerTest } = require("../test_utils/auth.test.utils");
+const { registerTest } = require("./auth.test.utils");
 const jwt = require('jsonwebtoken');
 const User = require("../models/user");
 const Url = require("../models/url");

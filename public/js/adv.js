@@ -1,8 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const shortUrl = localStorage.getItem("lastShortUrl");
-  console.log(shortUrl);
+  const shortUrl = localStorage.getItem("lastShortUrl" ,);
+  
   if (!shortUrl) {
     alert("Yönlendirilecek kısa link bulunamadı!");
+    
     return;
   }
 

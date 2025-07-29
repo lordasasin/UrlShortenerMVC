@@ -7,8 +7,7 @@ const app = express();
 const loggerReqRes = require("./middleware/loggerReqRes");
 app.use(express.json());
 const path = require("path");
-app.use(express.static(path.join(__dirname, "public")));
-app.use(express.static(path.join(__dirname, "view")));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(loggerReqRes);
 app.use("/user", require("./router/user"));

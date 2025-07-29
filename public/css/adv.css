@@ -1,8 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: white;
-  font-family: Arial, sans-serif;
+ background-color: #000;
 }
 
 .page-wrapper {
@@ -17,11 +16,11 @@ body {
   height: 500px;
   border: 1px solid #333;
   margin: 0 40px;
-  background-color: #f0f0f0;
+  background-color: black;
 }
 
 .center-text {
-  font-size: 32px;
+  font-size: 100px;
   font-weight: bold;
   color: #000;
 }

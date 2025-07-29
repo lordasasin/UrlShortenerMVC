@@ -3,8 +3,8 @@ const request = require("supertest");
 const config = require("../config/config");
 const User = require("../models/user");
 const Url = require("../models/url");
-const { registerTest } = require("../test_utils/auth.test.utils");
-const {shortUrl} = require('../test_utils/url.test.utils');
+const { registerTest } = require("./auth.test.utils");
+const {shortUrl} = require('./url.test.utils');
 
 let exampleShortUrl;
 beforeAll(async () => {

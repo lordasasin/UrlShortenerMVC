@@ -2,7 +2,7 @@ const { app, mongoose } = require("../index");
 const request = require("supertest");
 const config = require("../config/config");
 const user = require("../models/user");
-const { registerTest } = require("../test_utils/auth.test.utils");
+const { registerTest } = require("./auth.test.utils");
 
 
 beforeAll(async () => {
